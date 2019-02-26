@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+  <div id="container"></div>
+
+  <script>
+    let data = {
+      "Fish": {
+        "trout": {},
+        "salmon": {}
+      },
+      "Tree": {
+        "Huge": {
+          "sequoia": {},
+          "oak": {}
+        },
+        "Flowering": {
+          "redbud": {},
+          "magnolia": {
+              "1" :{
+                "1" :{},
+                "2" :{},
+                "3" :{}
+              },
+              "2" :{},
+              "3" :{}
+          }
+        }
+      }
+    };
+    function createTreeDom(obj){
+        if(!Object.keys(obj).length) return;
+        let ul = document.createElement('ul');
+        for (const key in obj) {
+            let li = document.createElement('li');
+            li.innerHTML = key;
+            let child = createTreeDom(obj[key]);
+            if(child){
+                li.append(child);
+            }
+            ul.append(li);
+        }
+        return ul;        
+    }
+    function createTree(container,obj){
+        container.append(createTreeDom(obj));
+    }
+
+    let container = document.getElementById('container');
+    createTree(container,data);
+    
+
+    // console.log(Object.keys(a).length);
+
+  </script>
+
+</body>
+</html>
